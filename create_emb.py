@@ -6,12 +6,12 @@ from sentence_transformers import SentenceTransformer
 documents = [
     {
         "Question": "What is my last 6 months sales",
-        "SQLQuery": """ /*As the number of days(6*30=180) is greater than 45 days showing monthly sales*/SELECT MONTH(sale_date) As 'Month', SUM(sale_price) AS 'Sum of Monthly Sales' FROM Sales_AI  WHERE sale_date >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 6, 0)
+        "SQLQuery": """ /*As the number of days(6*30=180) is greater than 45 days showing monthly sales*/SELECT MONTH(sale_date) As 'Month', SUM(sale_price) AS 'Sum of Monthly Sales' FROM Sales  WHERE sale_date >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 6, 0)
   AND sale_date <  DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0)   GROUP BY MONTH(sale_date)""",
     },
     {
         "Question": "list my invoice sales for the last month",
-        "SQLQuery": """ /*As the number of days(30) is less than 45 days showing daily sales*/ SELECT FORMAT(sale_date,'MM-dd-yy') As 'Day Of Month', SUM(sale_price) AS 'Sum of Daily Sales' FROM Sales_AI  WHERE sale_date >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0)
+        "SQLQuery": """ /*As the number of days(30) is less than 45 days showing daily sales*/ SELECT FORMAT(sale_date,'MM-dd-yy') As 'Day Of Month', SUM(sale_price) AS 'Sum of Daily Sales' FROM Sales  WHERE sale_date >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0)
   AND sale_date < DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0)  GROUP BY sale_date ORDER BY sale_date"""
     }]
 
